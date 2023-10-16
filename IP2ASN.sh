@@ -7,6 +7,8 @@ else
     iptxt="ip.txt"
 fi
 
+ipcsv="${iptxt%.*}"
+
 # 检测是否已经安装了mmdb-bin
 if ! command -v mmdblookup &> /dev/null; then
     echo "mmdblookup 未安装，开始安装..."
@@ -37,7 +39,7 @@ if [ ! -f $ASN_DB ]; then
 fi
 
 # 输出文件名
-OUTPUT_FILE="output.csv"
+OUTPUT_FILE="${ipcsv}.csv"
 
 # 写入CSV文件头
 echo "IP,ASN" > $OUTPUT_FILE
