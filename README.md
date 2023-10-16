@@ -5,5 +5,5 @@ wget -N https://ghproxy.com/https://raw.githubusercontent.com/cmliu/IP2ASN/main/
 ```
 
 ``` bash
-./IP2ASN.sh 
+./IP2ASN.sh [file_ip.txt]
 ```
