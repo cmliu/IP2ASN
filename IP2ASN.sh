@@ -1,6 +1,12 @@
 #!/bin/bash
 proxygithub="https://ghproxy.com/" #反代github加速地址，如果不需要可以将引号内容删除，如需修改请确保/结尾 例如"https://ghproxy.com/"
 
+if [ -n "$1" ]; then 
+    iptxt="$1"
+else
+    iptxt="ip.txt"
+fi
+
 # 检测是否已经安装了mmdb-bin
 if ! command -v mmdblookup &> /dev/null; then
     echo "mmdblookup 未安装，开始安装..."
@@ -50,4 +56,4 @@ do
   
   # 将结果写入CSV文件
   echo "$IP,AS$ASN" >> $OUTPUT_FILE
-done < "ip.txt"
+done < $iptxt
