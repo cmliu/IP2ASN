@@ -1,5 +1,5 @@
 #!/bin/bash
-proxygithub="https://ghproxy.com/" #反代github加速地址，如果不需要可以将引号内容删除，如需修改请确保/结尾 例如"https://ghproxy.com/"
+proxygithub="https://github.090227.xyz/" #反代github加速地址，如果不需要可以将引号内容删除，如需修改请确保/结尾 例如"https://ghproxy.com/"
 
 if [ -n "$1" ]; then 
     iptxt="$1"
@@ -26,7 +26,7 @@ ASN_DB="/usr/share/GeoIP/GeoLite2-ASN.mmdb"
 if [ ! -f $ASN_DB ]; then
     echo "文件 $ASN_DB 不存在。正在下载..."
     
-    # 使用curl命令下载文件
+    # 使用curl命令下载文件curl -L -o /usr/share/GeoIP/GeoLite2-ASN.mmdb https://github.cmliu.net/https://github.com/P3TERX/GeoLite.mmdb/raw/download/GeoLite2-ASN.mmdb
     curl -L -o $ASN_DB "${proxygithub}https://github.com/P3TERX/GeoLite.mmdb/raw/download/GeoLite2-ASN.mmdb"
     
     # 检查下载是否成功
@@ -48,14 +48,14 @@ echo "IP,ASN" > $OUTPUT_FILE
 while IFS= read -r line
 do
   # 删除行尾的回车符
-  IP=$(echo "$line" | tr -d '\r')
-  
+  #IP=$(echo "$line" | tr -d '\r')
+  IP=$(echo "$line" | cut -d':' -f1)
   # 打印出正在处理的IP地址
   #echo "Processing IP: $IP"
   
   # 使用mmdblookup查询ASN，并使用grep和cut提取ASN号
   ASN=$(mmdblookup --file $ASN_DB --ip "$IP" autonomous_system_number | grep -oP '(\d+)' | head -n 1)
-  
+  ip=$(echo "$line" | tr -d '\r')
   # 将结果写入CSV文件
-  echo "$IP,AS$ASN" >> $OUTPUT_FILE
+  echo "$ip,AS$ASN" >> $OUTPUT_FILE
 done < $iptxt
