@@ -26,7 +26,7 @@ ASN_DB="/usr/share/GeoIP/GeoLite2-ASN.mmdb"
 if [ ! -f $ASN_DB ]; then
     echo "文件 $ASN_DB 不存在。正在下载..."
     
-    # 使用curl命令下载文件curl -L -o /usr/share/GeoIP/GeoLite2-ASN.mmdb https://github.cmliu.net/https://github.com/P3TERX/GeoLite.mmdb/raw/download/GeoLite2-ASN.mmdb
+    # 使用curl命令下载文件curl -L -o /usr/share/GeoIP/GeoLite2-ASN.mmdb https://github.com/P3TERX/GeoLite.mmdb/raw/download/GeoLite2-ASN.mmdb
     curl -L -o $ASN_DB "${proxygithub}https://github.com/P3TERX/GeoLite.mmdb/raw/download/GeoLite2-ASN.mmdb"
     
     # 检查下载是否成功
